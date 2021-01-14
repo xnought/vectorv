@@ -20,7 +20,7 @@ function App() {
 					</Typography>
 					<PlayArrowTwoTone />
 					<IconButton
-						href="https://github.com/"
+						href="https://github.com/xnought/vectorv"
 						edge="end"
 						color="white"
 						aria-label="menu"
