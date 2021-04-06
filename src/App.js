@@ -1,13 +1,10 @@
 import logo from "./logo.svg";
 import Vector from "./components/Vector";
-import {
-	AppBar,
-	Toolbar,
-	Typography,
-	Button,
-	IconButton,
-} from "@material-ui/core";
-import { PlayArrowTwoTone, GitHub } from "@material-ui/icons";
+import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
+
+import "katex/dist/katex.min.css";
+import { InlineMath } from "react-katex";
+import { GitHub } from "@material-ui/icons";
 import "./App.css";
 
 function App() {
@@ -15,10 +12,6 @@ function App() {
 		<div className="App">
 			<AppBar position="static">
 				<Toolbar>
-					<Typography variant="h6">
-						Vector Manipulation Visualization
-					</Typography>
-					<PlayArrowTwoTone />
 					<IconButton
 						href="https://github.com/xnought/vectorv"
 						edge="end"
@@ -26,7 +19,10 @@ function App() {
 						aria-label="menu"
 					>
 						<GitHub />
-					</IconButton>
+					</IconButton>{" "}
+					<Typography variant="h6">
+						<InlineMath math="\ \vec{v} \text{ and } \vec{u} \text{ calculations} \nearrow" />
+					</Typography>
 				</Toolbar>
 			</AppBar>
 			<header className="App-header">

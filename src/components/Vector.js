@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import "katex/dist/katex.min.css";
+import { InlineMath, BlockMath } from "react-katex";
 import { Button, TextField, Box, Typography } from "@material-ui/core";
-import MathJax from "react-mathjax-preview";
 import { dot, cross, sum, square, sqrt, acos } from "mathjs";
 import VectorPlot from "./VectorPlot";
 
@@ -145,6 +146,7 @@ class Vector extends Component {
 		await this.angleBetween();
 		await this.crossMagnitude();
 	}
+
 	render() {
 		const { u1, u2, u3 } = this.state.ucpy;
 		const { v1, v2, v3 } = this.state.vcpy;
@@ -153,10 +155,18 @@ class Vector extends Component {
 		const input = (
 			<div>
 				<Box display="flex" justifyContent="center" marginTop={5}>
-					<Typography variant="h6">Vector u</Typography>
+					<Typography variant="h2">
+						<InlineMath math="\vec{u} = \langle i,j,k\rangle =  " />{" "}
+					</Typography>
 					<Box display="flex" marginX={3}>
+						<Typography variant="h2">
+							<InlineMath math="\langle" />{" "}
+						</Typography>
+
 						<TextField
-							label="i"
+							label={
+								<InlineMath math="\text{input } i \text{ here}" />
+							}
 							onChange={(e) => {
 								this.setState((prevState) => ({
 									uComponents: {
@@ -167,8 +177,13 @@ class Vector extends Component {
 							}}
 							type="number"
 						></TextField>
+						<Typography variant="h2">
+							<InlineMath math=", " />{" "}
+						</Typography>
 						<TextField
-							label="j"
+							label={
+								<InlineMath math="\text{input } j \text{ here}" />
+							}
 							onChange={(e) => {
 								this.setState((prevState) => ({
 									uComponents: {
@@ -179,8 +194,13 @@ class Vector extends Component {
 							}}
 							type="number"
 						></TextField>
+						<Typography variant="h2">
+							<InlineMath math=", " />{" "}
+						</Typography>
 						<TextField
-							label="k"
+							label={
+								<InlineMath math="\text{input } k \text{ here}" />
+							}
 							onChange={(e) => {
 								this.setState((prevState) => ({
 									uComponents: {
@@ -191,14 +211,24 @@ class Vector extends Component {
 							}}
 							type="number"
 						></TextField>
+						<Typography variant="h2">
+							<InlineMath math="\rangle" />{" "}
+						</Typography>
 					</Box>
 				</Box>
 				<Box display="flex" justifyContent="center">
-					<Typography variant="h6">Vector v</Typography>
+					<Typography variant="h2">
+						<InlineMath math="\vec{v} = \langle l,m,n\rangle =  " />{" "}
+					</Typography>
 
 					<Box display="flex" marginX={3}>
+						<Typography variant="h2">
+							<InlineMath math="\langle" />{" "}
+						</Typography>
 						<TextField
-							label="i"
+							label={
+								<InlineMath math="\text{input } l \text{ here}" />
+							}
 							onChange={(e) => {
 								this.setState((prevState) => ({
 									vComponents: {
@@ -209,8 +239,13 @@ class Vector extends Component {
 							}}
 							type="number"
 						></TextField>
+						<Typography variant="h2">
+							<InlineMath math="," />{" "}
+						</Typography>
 						<TextField
-							label="j"
+							label={
+								<InlineMath math="\text{input } m \text{ here}" />
+							}
 							onChange={(e) => {
 								this.setState((prevState) => ({
 									vComponents: {
@@ -221,8 +256,13 @@ class Vector extends Component {
 							}}
 							type="number"
 						></TextField>
+						<Typography variant="h2">
+							<InlineMath math="," />{" "}
+						</Typography>
 						<TextField
-							label="k"
+							label={
+								<InlineMath math="\text{input } n \text{ here}" />
+							}
 							onChange={(e) => {
 								this.setState((prevState) => ({
 									vComponents: {
@@ -233,10 +273,21 @@ class Vector extends Component {
 							}}
 							type="number"
 						></TextField>
+						<Typography variant="h2">
+							<InlineMath math="\rangle" />{" "}
+						</Typography>
 					</Box>
 				</Box>
-				<Box display="flex" justifyContent="center">
-					<Button onClick={this.allCalculations}>Calculate</Button>
+				<Box display="flex" justifyContent="center" marginTop={4}>
+					<Button
+						color="primary"
+						variant="contained"
+						onClick={this.allCalculations}
+					>
+						<Typography variant="h4">
+							<InlineMath math="\text{click to calculate}" />
+						</Typography>
+					</Button>
 				</Box>
 			</div>
 		);
@@ -247,63 +298,63 @@ class Vector extends Component {
 				<div>
 					{input}
 
-					<MathJax
-						math={`$$\\text{Given: } \\vec{u} =  \\langle${
+					<BlockMath
+						math={`\\text{Given: } \\vec{u} =  \\langle${
 							u1 + ", " + u2 + ", " + u3
 						}\\rangle \\ \\text{ and } \\  \\vec{v} =   \\langle${
 							v1 + ", " + v2 + ", " + v3
-						}\\rangle$$`}
+						}\\rangle`}
 					/>
-					<MathJax
-						math={`$$\\vec{u} + \\vec{v} = \\ \\langle${this.state.add.toString()}\\rangle$$`}
-					/>
-
-					<MathJax
-						math={`$$\\vec{u} - \\vec{v} = \\ \\langle${this.state.sub.toString()}\\rangle$$`}
+					<BlockMath
+						math={`\\vec{u} + \\vec{v} = \\ \\langle${this.state.add.toString()}\\rangle`}
 					/>
 
-					<MathJax
-						math={`$$|{\\vec{u}}| = \\sqrt{${numSum.sumu}} = ${sqrtSum.sumu} $$`}
-					/>
-					<MathJax
-						math={`$$|{\\vec{v}}| = \\sqrt{${numSum.sumv}} = ${sqrtSum.sumv}$$`}
+					<BlockMath
+						math={`\\vec{u} - \\vec{v} = \\ \\langle${this.state.sub.toString()}\\rangle`}
 					/>
 
-					<MathJax
-						math={`$$\\hat{u} =	\\frac{1}{\\sqrt{${
+					<BlockMath
+						math={`|{\\vec{u}}| = \\sqrt{${numSum.sumu}} = ${sqrtSum.sumu} `}
+					/>
+					<BlockMath
+						math={`|{\\vec{v}}| = \\sqrt{${numSum.sumv}} = ${sqrtSum.sumv}`}
+					/>
+
+					<BlockMath
+						math={`\\hat{u} =	\\frac{1}{\\sqrt{${
 							numSum.sumu
-						}}} \\langle${u1 + ", " + u2 + ", " + u3}\\rangle$$`}
+						}}} \\langle${u1 + ", " + u2 + ", " + u3}\\rangle`}
 					/>
-					<MathJax
-						math={`$$\\hat{v} =	\\frac{1}{\\sqrt{${
+					<BlockMath
+						math={`\\hat{v} =	\\frac{1}{\\sqrt{${
 							numSum.sumv
-						}}} \\langle${v1 + ", " + v2 + ", " + v3}\\rangle$$`}
+						}}} \\langle${v1 + ", " + v2 + ", " + v3}\\rangle`}
 					/>
-					<MathJax
-						math={`$$\\vec{u} \\cdot \\vec{v} = \\ ${this.state.dot}$$`}
+					<BlockMath
+						math={`\\vec{u} \\cdot \\vec{v} = \\ ${this.state.dot}`}
 					/>
 
-					<MathJax
-						math={`$$\\theta = cos^{-1}\\left(\\frac{${
+					<BlockMath
+						math={`\\theta = cos^{-1}\\left(\\frac{${
 							this.state.dot
 						}}{\\sqrt{${numSum.sumu * numSum.sumv}}}\\right) = ${
 							this.state.angle
-						}^{\\circ} $$`}
+						}^{\\circ} `}
 					/>
 
-					<MathJax
-						math={`$$\\vec{u} \\times \\vec{v} = \\ \\langle${this.state.cross.toString()}\\rangle$$`}
+					<BlockMath
+						math={`\\vec{u} \\times \\vec{v} = \\ \\langle${this.state.cross.toString()}\\rangle`}
 					/>
-					<MathJax
-						math={`$$|\\vec{u} \\times \\vec{v}| = \\sqrt{${crossMagnitude.numSum}} = ${crossMagnitude.sqrtSum} $$`}
+					<BlockMath
+						math={`|\\vec{u} \\times \\vec{v}| = \\sqrt{${crossMagnitude.numSum}} = ${crossMagnitude.sqrtSum} `}
 					/>
 
-					<MathJax
-						math={`$$\\text{proj}_u v = \\left(  \\frac{${
+					<BlockMath
+						math={`\\text{proj}_u v = \\left(  \\frac{${
 							proj.udotv
 						}}{${proj.uMagSquared}} \\right) \\langle${
 							u1 + ", " + u2 + ", " + u3
-						} \\rangle  = \\langle${proj.result.toString()} \\rangle  $$`}
+						} \\rangle  = \\langle${proj.result.toString()} \\rangle  `}
 					/>
 
 					<Box display="flex" justifyContent="center">
